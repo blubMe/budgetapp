@@ -1,0 +1,19 @@
+body {
+    font-family: -apple-system,BlinkMacSystemFont,'Segoe UI','Roboto', 'Oxygen','Ubuntu','Cantarell','Fira Sans','Droid Sans', 'Helvetica Neue',sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+    font-feature-settings: "kern";
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialised;
+    scroll-behavior: smooth;
+}
+
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    height: 300px;
+    background-image: radial-gradient(circle, #D7D7D7, #D7D7D7 1px, #FFF 1px, #FFF);
+    background-size: 28px 28px;
+}
