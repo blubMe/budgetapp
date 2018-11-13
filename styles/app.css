@@ -17,3 +17,11 @@ body {
     background-image: radial-gradient(circle, #D7D7D7, #D7D7D7 1px, #FFF 1px, #FFF);
     background-size: 28px 28px;
 }
+
+.main__navigation {
+    background: #F6F6F6;
+    padding: 10px 15px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
