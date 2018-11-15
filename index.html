@@ -4,28 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>BudgetMe</title>
-    <link rel="stylesheet" href="styles/app.css">
-    <link rel="stylesheet" href="styles/resets.css">
-    <script src="app.js"></script>
+    <title>Document</title>
+    <link rel="stylesheet" href="/styles/reset.css">
+    <link rel="stylesheet" href="/styles/app.css">
 </head>
 <body>
-    <div class="header">
-        <div class="card-wrapper">
-            <header-desc></header-desc>
-            <text-set text="$3000" stats="income"></text-set>
-            <text-set text="- $10" stats="outcome"></text-set>
+    <header>
+        <div class="info-details">
+            <div class="info-details__inner">
+                <div class="card">
+                    <div class="card__top">
+                        <p>your_name</p>
+                        <span>greeting</span>
+                    </div>
+                    <div class="card__center">
+                        <h5>Your balance until this month</h5>
+                        <h1>$ 381000</h1>
+                    </div>
+                    <div class="card__bottom"></div>
+                </div>
+                <div class="bar">
+                    <div class="bar__item bar__item--green">
+                        <span>Income logs</span>
+                        <h2>+ $400</h2>
+                    </div>
+                    <div class="bar__item bar__item--red">
+                        <span>Outcome logs</span>
+                        <h2>- $30</h2>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    <main>
-        <div class="main__navigation">
-            <input type="text" class="input input--long">
-            <input type="text" class="input">
-            <button>hit me</button>
+    </header>
+    <nav>
+        <div class="input-wrapper">
+            <select class="input__add input">
+                <option value="income" selected>+</option>
+                <option value="outcome">-</option>
+            </select>
+            <input class="input" id="description" type="text" value="" placeholder="Add description" aria-placeholder="Add description">
+            <input type="number" class="input" id="amount" placeholder="Value" aria-placeholder="Value">
+            <button id="fire" aria-label="button">Submit</button>
         </div>
-    </main>
-    <footer-app></footer-app>
-    <script src="query.js"></script>
-    <script src="components.js"></script>
+    </nav>
+    <script src="fx.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
