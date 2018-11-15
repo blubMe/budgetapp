@@ -28,11 +28,12 @@ const controller = ((budgetCtrl,uiCtrl) => {
     }
     const ctrlAddItem = () => {
         const input = uiController.getInput()
+        _out(input)
     }
 
     return {
         init: () => {
-            Fx._out('application has started')
+            _out('application has started')
             setupEventListener()
         }
     }
