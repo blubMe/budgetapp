@@ -54,7 +54,9 @@ const uiController = (() => {
         inputType: '.input__add',
         inputDesc: '#description',
         inputAmount: '#amount',
-        inputButton: '#fire'
+        inputButton: '#fire',
+        incomeContainer: '#income-section',
+        outcomeContainer: '#outcome-section'
     }
 
     return {
@@ -66,10 +68,34 @@ const uiController = (() => {
                 amount: Fx.selectTarget(inputAmount).value
             }
         },
-        getDomElement: () => domElement
+        getDomElement: () => domElement,
+        addListItem: (obj,type) => {
+            let element,html
+            
+            // create HTML blueprint
+            const {id,description,amount} = obj
+            if(type === 'income'){
+                element = domElement.incomeContainer
+                html = `
+                <div class="list" id="income-${id}">
+                    <p>${description}</p>
+                    <h3>${amount}</h3>
+                </div>`}
+            else if(type === 'outcome'){
+                element = domElement.outcomeContainer
+                html = `
+                <div class="list" id="outcome-${id}">
+                    <p>${description}</p>
+                    <h3>${amount}</h3>
+                </div>`
+            }
+
+            // insert html with the DOM
+            Fx.selectTarget(element).insertAdjacentHTML('beforeend',html)
+        }
     }
 })()
-const controller = ((budgetCtrl,uiCtrl) => {
+const controller = ((budgetCtrl) => {
     const setupEventListener = () => {
         const Dom = uiController.getDomElement()
         Fx.doEvent(Dom.inputButton,'click',ctrlAddItem)
@@ -81,8 +107,11 @@ const controller = ((budgetCtrl,uiCtrl) => {
         input = uiController.getInput()
         _out(input)
 
-        // 2.Add the item to the budgetController
-        newItem = budgetCtrl.addItem(input.type,input.description,input.amount)
+        // 2. Add item to the budget controller
+        newItem = budgetController.addItem(input.type,input.description,input.amount)
+        
+        // 3.Add item to the UI
+        uiController.addListItem(newItem,input.type)
     }
 
     return {
