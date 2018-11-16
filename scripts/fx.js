@@ -1,3 +1,5 @@
+// use this when ur app fully needed this
+
 const Fx = (() => {
     return {
         selectTarget: (props) => document.querySelector(props),
