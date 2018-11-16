@@ -71,7 +71,7 @@ const uiController = (() => {
         getDomElement: () => domElement,
         addListItem: (obj,type) => {
             let element,html
-            
+
             // create HTML blueprint
             const {id,description,amount} = obj
             if(type === 'income'){
@@ -91,7 +91,7 @@ const uiController = (() => {
             }
 
             // insert html with the DOM
-            Fx.selectTarget(element).insertAdjacentHTML('beforeend',html)
+            Fx.injectHTML(element,'beforeend',html)
         }
     }
 })()
