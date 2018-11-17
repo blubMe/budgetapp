@@ -92,6 +92,14 @@ const uiController = (() => {
 
             // insert html with the DOM
             Fx.injectHTML(element,'beforeend',html)
+        },
+        clearField: () => {
+            const field =  Fx.selectTargetAll(domElement.inputDesc + ', ' + domElement.inputAmount)
+            const fieldArray = Array.prototype.slice.call(field)
+            fieldArray.forEach((current,index,array) => {
+                current.value = ''
+            });
+            fieldArray[0].focus()
         }
     }
 })()
@@ -105,13 +113,16 @@ const controller = ((budgetCtrl) => {
 
         // 1.get the field input data
         input = uiController.getInput()
-        _out(input)
+        // _out(input)
 
         // 2. Add item to the budget controller
         newItem = budgetController.addItem(input.type,input.description,input.amount)
-        
+
         // 3.Add item to the UI
         uiController.addListItem(newItem,input.type)
+
+        // 4.Clear the fields
+        uiController.clearField()
     }
 
     return {
