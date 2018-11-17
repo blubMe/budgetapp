@@ -65,33 +65,31 @@ const uiController = (() => {
             return {
                 type: Fx.selectTarget(inputType).value,
                 description: Fx.selectTarget(inputDesc).value,
-                amount: Fx.selectTarget(inputAmount).value
+                amount: parseFloat(Fx.selectTarget(inputAmount).value)
             }
         },
         getDomElement: () => domElement,
         addListItem: (obj,type) => {
-            let element,html
+            let element,res
 
             // create HTML blueprint
             const {id,description,amount} = obj
+            const html = params => `
+            <div class="list" id="${params}-${id}">
+                <p>${description}</p>
+                <h3>${amount}</h3>
+            </div>`
             if(type === 'income'){
                 element = domElement.incomeContainer
-                html = `
-                <div class="list" id="income-${id}">
-                    <p>${description}</p>
-                    <h3>${amount}</h3>
-                </div>`}
+                res = html(type)
+            }
             else if(type === 'outcome'){
                 element = domElement.outcomeContainer
-                html = `
-                <div class="list" id="outcome-${id}">
-                    <p>${description}</p>
-                    <h3>${amount}</h3>
-                </div>`
+                res = html(type)
             }
 
             // insert html with the DOM
-            Fx.injectHTML(element,'beforeend',html)
+            Fx.injectHTML(element,'beforeend',res)
         },
         clearField: () => {
             const field =  Fx.selectTargetAll(domElement.inputDesc + ', ' + domElement.inputAmount)
@@ -108,21 +106,32 @@ const controller = ((budgetCtrl) => {
         const Dom = uiController.getDomElement()
         Fx.doEvent(Dom.inputButton,'click',ctrlAddItem)
     }
+
+    const updateBudget = () => {
+        // 1. calculate the budget
+        // 2. Return the budget
+        // 3. Display the budget on the UI
+    }
+
     const ctrlAddItem = () => {
         let input,newItem
 
         // 1.get the field input data
         input = uiController.getInput()
-        // _out(input)
+        const {description,amount,type} = input
+        if(description !== "" && !isNaN(amount) && amount > 0 ){
+            // 2. Add item to the budget controller
+            newItem = budgetController.addItem(type,description,amount)
 
-        // 2. Add item to the budget controller
-        newItem = budgetController.addItem(input.type,input.description,input.amount)
+            // 3.Add item to the UI
+            uiController.addListItem(newItem,type)
 
-        // 3.Add item to the UI
-        uiController.addListItem(newItem,input.type)
+            // 4.Clear the fields
+            uiController.clearField()
 
-        // 4.Clear the fields
-        uiController.clearField()
+            // 5.Calculate and update budget
+            updateBudget()
+        }
     }
 
     return {
