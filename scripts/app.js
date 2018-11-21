@@ -64,8 +64,8 @@ const budgetController = (() => {
             data.budget = data.totals.income - data.totals.outcome
 
             // calculate percentage
-            data.percentage = Math.round((data.totals.outcome / data.totals.income) * 100)
-
+            const a = data.percentage = Math.round((data.totals.outcome / data.totals.income) * 100)
+            data.totals.income > 0 ? a : data.percentage = -1
         },
         getBudget: () => {
             return {
