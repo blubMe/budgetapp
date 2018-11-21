@@ -13,6 +13,13 @@ const budgetController = (() => {
             this.amount = amount;
         }
     }
+
+    const CalculateTotal = type => {
+        let sum = 0
+        data.allItems[type].forEach(cur => sum += cur.amount)
+        data.totals[type] = sum
+    }
+
     const data = {
         allItems: {
             outcome: [],
@@ -21,7 +28,9 @@ const budgetController = (() => {
         totals: {
             outcome: 0,
             income: 0
-        }
+        },
+        budget: 0,
+        percentage: -1
 
     }
     // public api
@@ -46,6 +55,27 @@ const budgetController = (() => {
             // set public data of newItem
             return newItem
         },
+        calculateBudget: () => {
+            // calculate total income and outcome
+            CalculateTotal('outcome')
+            CalculateTotal('income')
+
+            // calculate budget: income - outcome
+            data.budget = data.totals.income - data.totals.outcome
+
+            // calculate percentage
+            data.percentage = Math.round((data.totals.outcome / data.totals.income) * 100)
+
+        },
+        getBudget: () => {
+            return {
+                budget: data.budget,
+                totalIncome: data.totals.income,
+                totalOutcome: data.totals.outcome,
+                percentage: data.percentage
+
+            }
+        },
         testing: () => _out(data)
     }
 })()
@@ -63,9 +93,9 @@ const uiController = (() => {
         getInput: () => {
             const { inputType,inputDesc,inputAmount } = domElement
             return {
-                type: Fx.selectTarget(inputType).value,
-                description: Fx.selectTarget(inputDesc).value,
-                amount: parseFloat(Fx.selectTarget(inputAmount).value)
+                type: Fx.select(inputType).value,
+                description: Fx.select(inputDesc).value,
+                amount: parseFloat(Fx.select(inputAmount).value)
             }
         },
         getDomElement: () => domElement,
@@ -109,8 +139,12 @@ const controller = ((budgetCtrl) => {
 
     const updateBudget = () => {
         // 1. calculate the budget
+        budgetController.calculateBudget()
         // 2. Return the budget
+        const budget = budgetCtrl.getBudget()
+
         // 3. Display the budget on the UI
+        _out(budget)
     }
 
     const ctrlAddItem = () => {
