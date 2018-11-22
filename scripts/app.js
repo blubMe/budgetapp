@@ -86,7 +86,8 @@ const uiController = (() => {
         inputAmount: '#amount',
         inputButton: '#fire',
         incomeContainer: '#income-section',
-        outcomeContainer: '#outcome-section'
+        outcomeContainer: '#outcome-section',
+        displayGreeting: '#card-greeting'
     }
 
     return {
@@ -128,6 +129,21 @@ const uiController = (() => {
                 current.value = ''
             });
             fieldArray[0].focus()
+        },
+        getTime: () => {
+            const { displayGreeting } = domElement
+            const currentTime = new Date().getHours()
+            0 <= currentTime && currentTime < 5
+            ? Fx.select(displayGreeting).text('hei night')
+            : 5 <= currentTime&&currentTime < 11
+            ? Fx.select(displayGreeting).text('good morning')
+            : 11 <= currentTime&&currentTime < 16
+            ? Fx.select(displayGreeting).text('good afternoon')
+            : 16 <= currentTime&&currentTime < 22
+            ? Fx.select(displayGreeting).text('good evening')
+            : 22 <= currentTime&&currentTime <= 24
+            ? Fx.select(displayGreeting).text('hei night')
+            : Fx.select(displayGreeting).text('something_error')
         }
     }
 })()
@@ -172,6 +188,7 @@ const controller = ((budgetCtrl) => {
         init: () => {
             _out('application has started')
             setupEventListener()
+            uiController.getTime()
         }
     }
 
