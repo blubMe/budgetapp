@@ -67,19 +67,6 @@ const budgetController = (() => {
             const a = data.percentage = Math.round((data.totals.outcome / data.totals.income) * 100)
             data.totals.income > 0 ? a : data.percentage = -1
         },
-        displayPercentage: () => {
-            const fields = selectTargetAll(domElement.percentage)
-            const nodeListForEach = (list,callback) => {
-                for ( var i = 0; i < list.length; i++){
-                    callback(list[i],i)
-                }
-            }
-            nodeListForEach(fields, (current, index) => {
-                percentage[index] > 0
-                ? current.textContent = percentage[index] + '%'
-                : current.textContent = percentage[index] + '---'
-            })
-        },
         getBudget: () => {
             return {
                 budget: data.budget,

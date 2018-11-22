@@ -9,10 +9,10 @@
     <link rel="stylesheet" href="/styles/app.css">
 </head>
 <body>
+    <div class="notif">
+        <p id="notif__text"></p>
+    </div>
     <header>
-        <div class="notif">
-            <p id="notif__text"></p>
-        </div>
         <div class="info-details">
             <div class="info-details__inner">
                 <div class="card">
@@ -21,20 +21,20 @@
                     </div>
                     <div class="card__center">
                         <h5>Your balance until this month</h5>
-                        <h1 id="card-amount-total">$ 381000</h1>
+                        <h1 id="card-amount-total">loading..</h1>
                     </div>
                     <div class="card__bottom"></div>
                 </div>
                 <div class="bar">
                     <div class="bar__item bar__item--green">
                         <span>Income logs</span>
-                        <h2 id="budget-income-value">+ $400</h2>
+                        <h2 id="budget-income-value">loading..</h2>
                     </div>
                     <div class="bar__item bar__item--red">
                         <span>Outcome logs</span>
                         <div style="display: flex; justify-content: space-between;align-items: center;">
-                            <h2 id="budget-outcome-value">- $30</h2>
-                            <p id="percentage-label">10%</p>
+                            <h2 id="budget-outcome-value">loading..</h2>
+                            <p id="percentage-label">loading..</p>
                         </div>
                     </div>
                 </div>
@@ -61,8 +61,8 @@
         </div>
     </main>
     <script>
-        const desc = 'Some tweak improvements, new features calculation complete, Some bug appeared i will fix dat , November 22nd 2018'
-        const version = 'Version 0.1.4'
+        const desc = 'Some tweak improvements, Fix layout and some styling , November 22nd 2018'
+        const version = 'Version 0.1.5'
     </script>
     <script src="scripts/fx.js"></script>
     <script src="scripts/app.js"></script>
