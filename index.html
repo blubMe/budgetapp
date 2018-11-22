@@ -21,18 +21,21 @@
                     </div>
                     <div class="card__center">
                         <h5>Your balance until this month</h5>
-                        <h1>$ 381000</h1>
+                        <h1 id="card-amount-total">$ 381000</h1>
                     </div>
                     <div class="card__bottom"></div>
                 </div>
                 <div class="bar">
                     <div class="bar__item bar__item--green">
                         <span>Income logs</span>
-                        <h2>+ $400</h2>
+                        <h2 id="budget-income-value">+ $400</h2>
                     </div>
                     <div class="bar__item bar__item--red">
                         <span>Outcome logs</span>
-                        <h2>- $30</h2>
+                        <div style="display: flex; justify-content: space-between;align-items: center;">
+                            <h2 id="budget-outcome-value">- $30</h2>
+                            <p id="percentage-label">10%</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -50,12 +53,16 @@
         </div>
     </nav>
     <main>
-        <div id="income-section"></div>
-        <div id="outcome-section"></div>
+        <div id="income-section">
+            <h2>Income</h2>
+        </div>
+        <div id="outcome-section">
+            <h2>Outcome</h2>
+        </div>
     </main>
     <script>
-        const desc = 'Some tweak improvements, new features greeting and version tag , November 22nd 2018'
-        const version = 'Version 0.1.3'
+        const desc = 'Some tweak improvements, new features calculation complete, Some bug appeared i will fix dat , November 22nd 2018'
+        const version = 'Version 0.1.4'
     </script>
     <script src="scripts/fx.js"></script>
     <script src="scripts/app.js"></script>

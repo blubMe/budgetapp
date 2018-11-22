@@ -79,6 +79,7 @@ nav {
     background: #445DC8;
     color: white;
     border: none;
+    cursor: pointer;
 }
 
 #card-greeting {
@@ -94,4 +95,31 @@ nav {
     text-align: center;
     color: #6a6a6a;
     background: #eee;
+}
+
+main {
+    display: flex;
+    max-width: 600px;
+    margin: 0 auto;
+    justify-content: space-between;
+    padding: 20px 30px 0 30px;
+}
+
+#income-section,#outcome-section {
+    padding: 0 15px;
+}
+
+#income-section h2 {
+    color: #47BC63;
+    margin-bottom: 15px;
+}#outcome-section h2 {
+    color: #EB4962;
+    margin-bottom: 15px;
+}
+
+.list {
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    width: inherit
 }

@@ -67,13 +67,33 @@ const budgetController = (() => {
             const a = data.percentage = Math.round((data.totals.outcome / data.totals.income) * 100)
             data.totals.income > 0 ? a : data.percentage = -1
         },
+        displayPercentage: () => {
+            const fields = selectTargetAll(domElement.percentage)
+            const nodeListForEach = (list,callback) => {
+                for ( var i = 0; i < list.length; i++){
+                    callback(list[i],i)
+                }
+            }
+            nodeListForEach(fields, (current, index) => {
+                percentage[index] > 0
+                ? current.textContent = percentage[index] + '%'
+                : current.textContent = percentage[index] + '---'
+            })
+        },
         getBudget: () => {
             return {
                 budget: data.budget,
                 totalIncome: data.totals.income,
                 totalOutcome: data.totals.outcome,
                 percentage: data.percentage
-
+            }
+        },
+        getBudgetInit: () => {
+            return {
+                budget: 0,
+                totalIncome: 0,
+                totalOutcome: 0,
+                percentage: -1
             }
         },
         testing: () => _out(data)
@@ -87,7 +107,11 @@ const uiController = (() => {
         inputButton: '#fire',
         incomeContainer: '#income-section',
         outcomeContainer: '#outcome-section',
-        displayGreeting: '#card-greeting'
+        displayGreeting: '#card-greeting',
+        budgetLabel: '#card-amount-total',
+        budgetIncomeLabel: '#budget-income-value',
+        budgetOutcomeLabel: '#budget-outcome-value',
+        percentageLabel: '#percentage-label'
     }
 
     return {
@@ -130,6 +154,17 @@ const uiController = (() => {
             });
             fieldArray[0].focus()
         },
+        displayBudget: obj => {
+            const { budgetLabel,budgetIncomeLabel,budgetOutcomeLabel,percentageLabel } = domElement
+            Fx.select(budgetLabel).text(obj.budget)
+            Fx.select(budgetIncomeLabel).text(obj.totalIncome)
+            Fx.select(budgetOutcomeLabel).text(obj.totalOutcome)
+            Fx.select(percentageLabel).text(obj.percentage)
+
+            obj.percentage > 0
+            ? Fx.select(percentageLabel).text(obj.percentage + '%')
+            : Fx.select(percentageLabel).text('---')
+        },
         getTime: () => {
             const { displayGreeting } = domElement
             const currentTime = new Date().getHours()
@@ -147,7 +182,7 @@ const uiController = (() => {
         }
     }
 })()
-const controller = ((budgetCtrl) => {
+const controller = (() => {
     const setupEventListener = () => {
         const Dom = uiController.getDomElement()
         Fx.doEvent(Dom.inputButton,'click',ctrlAddItem)
@@ -157,10 +192,9 @@ const controller = ((budgetCtrl) => {
         // 1. calculate the budget
         budgetController.calculateBudget()
         // 2. Return the budget
-        const budget = budgetCtrl.getBudget()
-
+        const budget = budgetController.getBudget()
         // 3. Display the budget on the UI
-        _out(budget)
+        uiController.displayBudget(budget)
     }
 
     const ctrlAddItem = () => {
@@ -187,6 +221,7 @@ const controller = ((budgetCtrl) => {
     return {
         init: () => {
             _out('application has started')
+            uiController.displayBudget(budgetController.getBudgetInit())
             setupEventListener()
             uiController.getTime()
         }
