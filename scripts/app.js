@@ -119,7 +119,7 @@ const uiController = (() => {
             const html = params => `
             <div class="list" id="${params}-${id}">
                 <p>${description}</p>
-                <h3>${amount}</h3>
+                <h3 class="${type}">${amount}</h3>
             </div>`
             if(type === 'income'){
                 element = domElement.incomeContainer
@@ -143,9 +143,9 @@ const uiController = (() => {
         },
         displayBudget: obj => {
             const { budgetLabel,budgetIncomeLabel,budgetOutcomeLabel,percentageLabel } = domElement
-            Fx.select(budgetLabel).text(obj.budget)
-            Fx.select(budgetIncomeLabel).text(obj.totalIncome)
-            Fx.select(budgetOutcomeLabel).text(obj.totalOutcome)
+            Fx.select(budgetLabel).text(`Rp.${obj.budget}`)
+            Fx.select(budgetIncomeLabel).text(`Rp.${obj.totalIncome}`)
+            Fx.select(budgetOutcomeLabel).text(`Rp.${obj.totalOutcome}`)
             Fx.select(percentageLabel).text(obj.percentage)
 
             obj.percentage > 0
